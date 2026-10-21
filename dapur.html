@@ -1,0 +1,280 @@
+```html
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dapur Barokah - Ponpes Raudlatul Musthofa</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        },
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        gold: {
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        arabic: ['Amiri', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .arabic-text {
+            font-family: 'Amiri', serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #059669;
+            border-radius: 8px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Top Islamic Banner Info -->
+    <div class="bg-emerald-950 text-amber-300 text-xs sm:text-sm py-2.5 px-4 text-center font-medium flex justify-between items-center px-4 sm:px-12 border-b border-emerald-800/50">
+        <div class="flex items-center gap-2 mx-auto lg:mx-0">
+            <i class="fa-solid fa-utensils text-amber-400"></i>
+            <span>"Makanan untuk dua orang cukup untuk tiga orang, dan makanan tiga orang cukup untuk empat orang." (HR. Bukhari & Muslim)</span>
+        </div>
+        <div class="hidden lg:flex items-center gap-6 text-xs text-emerald-200">
+            <span><i class="fa-solid fa-clock me-1 text-amber-400"></i> Layanan Dapur 24 Jam</span>
+            <span><i class="fa-solid fa-phone me-1 text-amber-400"></i> Hotline Dapur: 0812-9988-7766</span>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-md border-b border-emerald-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-900 via-emerald-700 to-emerald-600 flex items-center justify-center text-white text-2xl shadow-lg shadow-emerald-900/20 group-hover:scale-105 transition duration-300">
+                        <i class="fa-solid fa-hands-holding-child text-amber-300"></i>
+                    </div>
+                    <div>
+                        <span class="text-lg sm:text-xl font-extrabold text-emerald-900 block leading-tight">Dapur Barokah</span>
+                        <span class="text-xs font-bold text-amber-600 tracking-wider">PONPES RAUDLATUL MUSTHOFA</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-7 font-semibold text-sm text-slate-700">
+                    <a href="#beranda" class="hover:text-emerald-700 transition">Beranda</a>
+                    <a href="#menu" class="hover:text-emerald-700 transition">Menu Hari Ini</a>
+                    <a href="#kalkulator" class="hover:text-emerald-700 transition">Kalkulator Logistik</a>
+                    <a href="#donasi" class="hover:text-emerald-700 transition">Infaq Pangan</a>
+                    <a href="#piket" class="hover:text-emerald-700 transition">Tim & Piket</a>
+                    <a href="#adab" class="hover:text-emerald-700 transition">Adab & Doa</a>
+                    <a href="#saran" class="hover:text-emerald-700 transition">Saran Gizi</a>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="#donasi" class="bg-gradient-to-r from-emerald-700 to-emerald-600 hover:from-emerald-800 hover:to-emerald-700 text-white px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-md shadow-emerald-700/20 flex items-center gap-2 transition duration-300">
+                        <i class="fa-solid fa-heart text-amber-300"></i> Infaq Santri
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="lg:hidden text-slate-700 hover:text-emerald-700 text-2xl focus:outline-none p-2" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-6 space-y-3 shadow-lg">
+            <a href="#beranda" class="block py-2 text-slate-700 hover:text-emerald-700 font-semibold">Beranda</a>
+            <a href="#menu" class="block py-2 text-slate-700 hover:text-emerald-700 font-semibold">Menu Hari Ini</a>
+            <a href="#kalkulator" class="block py-2 text-slate-700 hover:text-emerald-700 font-semibold">Kalkulator Logistik</a>
+            <a href="#donasi" class="block py-2 text-slate-700 hover:text-emerald-700 font-semibold">Infaq Pangan</a>
+            <a href="#piket" class="block py-2 text-slate-700 hover:text-emerald-700 font-semibold">Tim & Piket</a>
+            <a href="#adab" class="block py-2 text-slate-700 hover:text-emerald-700 font-semibold">Adab & Doa</a>
+            <a href="#saran" class="block py-2 text-slate-700 hover:text-emerald-700 font-semibold">Saran & Feedbacks</a>
+            <div class="pt-2">
+                <a href="#donasi" class="w-full bg-emerald-700 text-white text-center py-3 rounded-xl font-bold flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-heart text-amber-300"></i> Infaq Pangan Santri
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- 1. Hero Section -->
+        <section id="beranda" class="relative bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-900 text-white py-16 lg:py-24 overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-800/80 border border-emerald-600/50 text-amber-300 text-xs sm:text-sm font-bold tracking-wide shadow-sm">
+                            <i class="fa-solid fa-kaaba text-amber-400"></i> Pondok Pesantren Raudlatul Musthofa
+                        </div>
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            Santapan Halal, Thoyyib <br class="hidden sm:inline"/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-gold-300">& Penuh Keberkahan</span>
+                        </h1>
+                        <p class="text-emerald-100 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                            Selamat datang di portal resmi <strong>Dapur Barokah Ponpes Raudlatul Musthofa</strong>. Kami berkomitmen menyediakan konsumsi harian berkualitas, higienis, dan kaya gizi untuk mendukung perjuangan para santri penuntut ilmu Al-Qur'an dan Kitab Kuning.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                            <a href="#menu" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-7 py-3.5 rounded-xl transition duration-300 shadow-xl shadow-amber-500/20 text-center flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-bowl-food text-lg"></i> Lihat Menu Hari Ini
+                            </a>
+                            <a href="#kalkulator" class="w-full sm:w-auto bg-emerald-800/80 hover:bg-emerald-700 text-white font-bold px-7 py-3.5 rounded-xl border border-emerald-600 transition duration-300 text-center flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-calculator text-lg"></i> Simulation Logistik
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Visual Hero Showcase -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-md">
+                            <div class="absolute -top-4 -left-4 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                            <div class="relative rounded-3xl overflow-hidden border-4 border-emerald-600/40 shadow-2xl bg-emerald-950">
+                                <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80" alt="Dapur Barokah Raudlatul Musthofa" class="w-full h-80 sm:h-96 object-cover hover:scale-105 transition duration-500" srcset="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null; this.src='https://placehold.co/800x600/065f46/ffffff?text=Dapur+Raudlatul+Musthofa';">
+                                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-6 text-white">
+                                    <span class="bg-amber-500 text-slate-950 text-xs font-black px-2.5 py-1 rounded-md uppercase">Standar Hygiene Tinggi</span>
+                                    <h2 class="text-lg font-extrabold mt-2">Dapur Utama Raudlatul Musthofa</h2>
+                                    <p class="text-xs text-slate-300">Menyajikan 3.900+ porsi bergizi seimbang setiap hari untuk para santri & pengajar.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats Grid -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                    <div class="bg-emerald-800/40 backdrop-blur-md border border-emerald-700/50 p-5 rounded-2xl text-center">
+                        <div class="text-3xl sm:text-4xl font-black text-amber-300 mb-1">1,300+</div>
+                        <div class="text-xs sm:text-sm text-emerald-100 font-medium">Santri Putra & Putri</div>
+                    </div>
+                    <div class="bg-emerald-800/40 backdrop-blur-md border border-emerald-700/50 p-5 rounded-2xl text-center">
+                        <div class="text-3xl sm:text-4xl font-black text-amber-300 mb-1">3,900</div>
+                        <div class="text-xs sm:text-sm text-emerald-100 font-medium">Porsi Sehat / Hari</div>
+                    </div>
+                    <div class="bg-emerald-800/40 backdrop-blur-md border border-emerald-700/50 p-5 rounded-2xl text-center">
+                        <div class="text-3xl sm:text-4xl font-black text-amber-300 mb-1">520 kg</div>
+                        <div class="text-xs sm:text-sm text-emerald-100 font-medium">Bahan Olahan Fresh/Hari</div>
+                    </div>
+                    <div class="bg-emerald-800/40 backdrop-blur-md border border-emerald-700/50 p-5 rounded-2xl text-center">
+                        <div class="text-3xl sm:text-4xl font-black text-amber-300 mb-1">28 Orang</div>
+                        <div class="text-xs sm:text-sm text-emerald-100 font-medium">Tim Juru Masak & Piket</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Interactive Menu Schedule Section -->
+        <section id="menu" class="py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="text-emerald-700 font-extrabold text-xs uppercase tracking-widest bg-emerald-100 px-3 py-1 rounded-full">Gizi Seimbang & Halal</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Jadwal Menu Makan Pekan Ini</h2>
+                    <p class="text-slate-600 mt-2 text-sm sm:text-base">Variasi hidangan yang dipadukan untuk memenuhi kecukupan kalori, karbohidrat, protein, serta serat santri Raudlatul Musthofa.</p>
+                </div>
+
+                <!-- Day Selector Tabs -->
+                <div class="flex items-center justify-start md:justify-center gap-2 overflow-x-auto pb-4 mb-8 custom-scrollbar">
+                    <button onclick="changeDay('Senin')" id="tab-Senin" class="day-tab px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-200 bg-emerald-700 text-white shadow-md">Senin</button>
+                    <button onclick="changeDay('Selasa')" id="tab-Selasa" class="day-tab px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-200 bg-white text-slate-600 hover:bg-emerald-50 border border-slate-200">Selasa</button>
+                    <button onclick="changeDay('Rabu')" id="tab-Rabu" class="day-tab px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-200 bg-white text-slate-600 hover:bg-emerald-50 border border-slate-200">Rabu</button>
+                    <button onclick="changeDay('Kamis')" id="tab-Kamis" class="day-tab px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-200 bg-white text-slate-600 hover:bg-emerald-50 border border-slate-200">Kamis (Puasa Sunnah)</button>
+                    <button onclick="changeDay('Jumat')" id="tab-Jumat" class="day-tab px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-200 bg-white text-slate-600 hover:bg-emerald-50 border border-slate-200">Jum'at Barokah</button>
+                    <button onclick="changeDay('Sabtu')" id="tab-Sabtu" class="day-tab px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-200 bg-white text-slate-600 hover:bg-emerald-50 border border-slate-200">Sabtu</button>
+                    <button onclick="changeDay('Minggu')" id="tab-Minggu" class="day-tab px-5 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-200 bg-white text-slate-600 hover:bg-emerald-50 border border-slate-200">Minggu</button>
+                </div>
+
+                <!-- Time Meal Cards Container -->
+                <div id="menu-cards-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Cards dynamically rendered via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Calculator Logistik & Anggaran Dapur -->
+        <section id="kalkulator" class="py-16 bg-emerald-950 text-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-5 space-y-6">
+                        <span class="bg-amber-500/20 border border-amber-400/40 text-amber-300 font-bold text-xs px-3 py-1 rounded-full uppercase">Alat Manajemen Pengurus Dapur</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                            Kalkulator Estimasi Bahan Pokok & Anggaran Dapur
+                        </h2>
+                        <p class="text-emerald-100 text-sm sm:text-base leading-relaxed">
+                            Simulasi otomatis kebutuhan bahan mentah (beras, lauk protein, sayuran, minyak goreng) serta total anggaran operasional dapur berdasarkan jumlah santri dan durasi waktu.
+                        </p>
+
+                        <div class="bg-emerald-900/80 rounded-2xl p-5 border border-emerald-700/60 space-y-3">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-info text-amber-400 text-xl"></i>
+                                <h3 class="font-bold text-amber-300">Standar Porsi Santri Raudlatul Musthofa:</h3>
+                            </div>
+                            <ul class="text-xs sm:text-sm text-emerald-100 space-y-2 list-disc list-inside">
+                                <li><strong>Beras:</strong> ~135 gram / santri / porsi (405g / hari)</li>
+                                <li><strong>Lauk Protein:</strong> ~90 gram (Ayam/Daging) / 1 butir Telur</li>
+                                <li><strong>Sayuran Fresh:</strong> ~80 gram / santri / porsi</li>
+                                <li><strong>Minyak Goreng:</strong> ~25 ml / santri / hari</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Simulator Form & Real-time Calculation Panel -->
+                    <div class="lg:col-span-7">
+                        <div class="bg-white text-slate-800 p-6 sm:p-8 rounded-3xl shadow-2xl border border-slate-100">
+                            <h3 class="text-xl font-extrabold text-emerald-900 border-b border-slate-200 pb-4 mb-6 flex items-center justify-between">
+                                <span><i class="fa-solid fa-calculator text-emerald-600 me-2"></i> Simulator Logistik Dapur</span>
+                                <span class="text-xs bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-bold">Real-time Calculation</span>
+                            </h3>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="santri-count" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                                        Jumlah Santri (Orang)
